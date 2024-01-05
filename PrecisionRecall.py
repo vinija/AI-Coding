@@ -1,5 +1,16 @@
 import numpy as np
 
+"""
+The `calculate_precision_recall` function computes precision and recall metrics for a binary classification task. Here's a brief analysis of its time and space complexity:
+
+Time Complexity:
+- The function's time complexity is O(n), where n is the number of elements in `true_labels` and `predicted_labels`. This complexity arises from the element-wise comparisons and sum operations that are performed once for each element in the arrays.
+
+Space Complexity:
+- The space complexity is O(1) as the function uses a constant amount of space. Additional space usage does not depend on the input size, as it only involves a few scalar variables (`true_positives`, `false_positives`, `false_negatives`, `precision`, and `recall`).
+
+This function is efficient for computing precision and recall, with linear time complexity and constant space complexity, making it suitable for large datasets commonly used in classification tasks.
+"""
 def calculate_precision_recall(true_labels, predicted_labels):
     """
     Calculates the precision and recall from true labels and predicted labels of a classification task.

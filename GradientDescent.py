@@ -3,6 +3,14 @@ import numpy as np
 
 """
 Gradient descent is an optimization algorithm used to minimize a function (usually a loss function) by iteratively moving towards the minimum value of the function.
+
+The `gradient_descent` function in this script is used to find the best-fit line for a given set of data points by minimizing the mean squared error. It does so by iteratively adjusting the slope (`m`) and y-intercept (`c`) of the line. Here's a brief analysis of its time and space complexity:
+
+- **Time Complexity**: O(iterations * n), where `iterations` is the number of iterations the gradient descent algorithm runs for, and `n` is the number of data points. This complexity arises because, in each iteration, the function calculates gradients and updates `m` and `c` based on all `n` data points.
+
+- **Space Complexity**: O(1), since the space used by the function is constant and does not depend on the size of the input data. The primary variables (`m`, `c`, `dm`, `dc`, etc.) use a fixed amount of space regardless of the number of data points.
+
+This function is a basic implementation of gradient descent for linear regression and is useful for understanding the fundamental concepts of this optimization technique.
 """
 
 

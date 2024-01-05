@@ -2,7 +2,25 @@ import pytest
 import numpy as np
 import torch
 
-## Numpy implementation
+"""
+Time and Space Complexity:
+
+The `knn_find_neighbors` function, implemented in both NumPy and PyTorch, finds the k nearest neighbors to a given query point within a dataset, using Euclidean distance. Here's an analysis of its time and space complexity:
+
+Time Complexity:
+- The primary operation is the computation of Euclidean distances between the query point and each point in the dataset. This operation is O(d) for each point, where d is the number of dimensions.
+- Since this operation is performed for each of the n data points, the total time complexity for the distance calculation is O(n*d).
+- Sorting or partitioning these distances to find the k smallest values has a complexity of O(n*log(n)) for sorting, or O(n) for partitioning.
+- Therefore, the overall time complexity is O(n*d + n*log(n)) for sorting or O(n*d + n) for partitioning, depending on the implementation.
+
+Space Complexity:
+- The function stores the distances from each data point to the query point, requiring O(n) space.
+- It also stores indices of the k smallest distances and the k nearest neighbors, requiring O(k) space.
+- Thus, the total space complexity is O(n + k).
+
+The NumPy and PyTorch implementations have similar complexity, but they might differ slightly in performance due to differences in how these libraries handle array operations and memory management. The PyTorch version can leverage GPU acceleration if the data is on a GPU, potentially offering faster computation for large datasets.
+
+"""
 def knn_find_neighbors(data, query, k):
     """
     Finds the k nearest neighbors of a query point in the given dataset using the Euclidean distance.
@@ -67,7 +85,7 @@ def knn_find_neighbors_torch(data, query, k):
     # Return the k nearest neighbors and their indices
     return data[k_indices], k_indices
 
-# Test case for PyTorch
+
 def test_knn_find_neighbors_pytorch():
     data = torch.tensor([[1.0, 2.0], [2.0, 3.0], [3.0, 4.0], [4.0, 5.0]])
     query = torch.tensor([2.5, 3.5])
@@ -80,7 +98,7 @@ def test_knn_find_neighbors_pytorch():
     assert torch.equal(neighbors, expected_neighbors)
     assert torch.equal(indices, expected_indices)
 
-# Running the test
+
 
 
 

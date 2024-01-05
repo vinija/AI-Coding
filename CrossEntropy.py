@@ -1,5 +1,20 @@
 import numpy as np
 import pytest
+
+"""
+Time and Space Complexity:
+
+The `binary_cross_entropy_loss` function calculates the average binary cross-entropy loss between true labels and predicted probabilities for a binary classification task. Here's the time and space complexity analysis for this function:
+
+Time Complexity:
+- The function iterates over each element in `y_true` and `y_pred` once to compute the loss. Therefore, the time complexity is O(n), where n is the number of elements in `y_true` and `y_pred`.
+
+Space Complexity:
+- The space complexity is O(1) as the function uses a fixed amount of space. It only creates a few additional variables (`epsilon`, `y_pred` after clipping) irrespective of the input size. The computation of the loss itself does not require additional space proportional to the size of the input arrays.
+
+The function is efficient and scales linearly with the number of data points, making it suitable for large datasets typical in machine learning tasks. The space requirement is minimal, ensuring its usability even in memory-constrained environments.
+
+"""
 def binary_cross_entropy_loss(y_true, y_pred):
     """
     Compute the binary cross-entropy loss, a common loss function for binary classification tasks.

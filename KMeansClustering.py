@@ -1,5 +1,14 @@
 import numpy as np
 
+"""
+Time and Space Complexity
+
+- **Time Complexity**: O(n * k * i * d), where `n` is the number of data points, `k` is the number of clusters, `i` is the number of iterations, and `d` is the number of dimensions/features in each data point. This complexity arises from calculating the distance of each data point to each centroid in every iteration.
+
+- **Space Complexity**: O(n * d + k * d), where `n * d` is for storing the data points and `k * d` for the centroids. Additionally, space is used to store the distances from each point to each centroid and the index of the closest centroid for each point.
+
+"""
+
 def kmeans_clustering(data, k, num_iterations=100):
     """
     Performs K-Means clustering which is an unsupervised machine learning algorithm used for partitioning a given dataset into a set of k groups (or clusters).

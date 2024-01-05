@@ -1,6 +1,14 @@
 import torch
 import numpy as np
 
+"""
+Time and Space Complexity:
+
+- Time Complexity: O(batch_size * seq_len^2 * feature_dim), dominated by matrix multiplications involving the tensors Q, K, and V in the attention mechanism.
+- Space Complexity: O(batch_size * seq_len^2) or O(batch_size * seq_len * feature_dim), depending on the larger of the two dimensions, seq_len and feature_dim, due to the storage of intermediate and output tensors.
+
+
+"""
 def scaled_dot_product_attention(Q, K, V):
     """
     Computes the scaled dot product attention using PyTorch.

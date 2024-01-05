@@ -3,6 +3,23 @@ from sklearn import metrics
 import pytest
 
 """
+
+Time and Space Complexity:
+
+The `calculate_tpr_fpr` and `calculate_auc_roc_with_sklearn` functions in this script are used for evaluating the performance of binary classification models. The time and space complexity for these functions are as follows:
+
+1. **`calculate_tpr_fpr` Function**:
+   - Time Complexity: O(n), where n is the number of elements in `y_true` and `y_scores`. This is because the function involves a single pass through these arrays to compute True Positives (TP), False Positives (FP), False Negatives (FN), and True Negatives (TN).
+   - Space Complexity: O(1), as the space used by the function is constant and does not depend on the size of the input arrays. The primary variables are scalar values that store the counts of TP, FP, FN, and TN.
+
+2. **`calculate_auc_roc_with_sklearn` Function**:
+   - Time Complexity: O(n * log(n)), typically dominated by the sorting operation involved in computing the ROC curve, where n is the number of elements in `y_true` and `y_scores`.
+   - Space Complexity: O(n), where n is the number of elements in `y_true` and `y_scores`. This is because the function may internally need to store sorted arrays or additional structures for computing the AUC-ROC.
+
+Both functions are crucial for analyzing the performance of classification algorithms, with `calculate_tpr_fpr` providing insights into model sensitivity (TPR) and specificity (FPR), and `calculate_auc_roc_with_sklearn` offering a comprehensive measure of model performance across various thresholds.
+
+
+
 An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters:
 
 True Positive Rate
