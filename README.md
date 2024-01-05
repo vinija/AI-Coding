@@ -17,5 +17,5 @@
 ### Other  
   - 🔹 [Dot product of two sparse vectors](SparseVectors.py)
   - 🔹 [Find local minima in an array](LocalMinima.py)
-  - 🔹
+  - 🔹 [Does Matrix have equal diagonals](MatrixDiagonal.py)
   - 🔹 
