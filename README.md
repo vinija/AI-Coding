@@ -7,6 +7,7 @@
   - 🔹 [K-means clustering](KMeansClustering.py)
   - 🔹 [KNN](KNN.py)
   - 🔹 [Gradient Descent](GradientDescent.py)
+  - 🔹 [Cross Entropy loss](CrossEntropy.py)
 
 ### Metrics
   - 🔹 [Precision and Recall](PrecisionRecall.py)
@@ -15,4 +16,3 @@
   - 🔹 
   - 🔹
   - 🔹 
-  - 🔹
