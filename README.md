@@ -3,3 +3,4 @@
 - Feel free to help this space grow and contribute!
 - So far, it includes:
   - 🔹 Scaled Dot Product Attention from 'Attention Is All You Need' by Vaswani et al.
+  - 🔹 K-means clustering
