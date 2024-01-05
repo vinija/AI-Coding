@@ -1,5 +1,16 @@
-import numpy as np
-import pytest
+"""
+The `SparseVector` class and its `dotProduct` method represent an efficient way to handle sparse vectors and calculate their dot product. Here's the time and space complexity analysis:
+
+1. **Initialization (`__init__`)**:
+   - Time Complexity: O(n), where n is the number of elements in the input `nums` array. This is due to the iteration over each element to check and store the non-zero elements.
+   - Space Complexity: O(k), where k is the number of non-zero elements in the input `nums` array. The space is used to store these non-zero elements and their indices in a dictionary.
+
+2. **Dot Product (`dotProduct`)**:
+   - Time Complexity: O(min(k1, k2)), where k1 and k2 are the numbers of non-zero elements in the two sparse vectors. The method iterates through the non-zero elements of the first vector and checks for corresponding non-zero elements in the second vector.
+   - Space Complexity: O(1), as the space used for the dot product calculation is constant. It involves a few scalar variables for the calculation and does not depend on the size of the input vectors.
+
+The `SparseVector` class is particularly efficient for vectors with a large number of elements, most of which are zeros, as it saves significant memory and computational resources compared to dense representation. The dot product operation is also optimized by only considering the non-zero elements, which is especially beneficial when the vectors are very sparse.
+"""
 
 class SparseVector:
     def __init__(self, nums):

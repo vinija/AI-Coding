@@ -16,6 +16,9 @@ Input: arr[] = {3, 2, 1};
 Output: Index of local minima is 2
 
 Source: https://www.geeksforgeeks.org/find-local-minima-array/
+
+# Time Complexity: O(log n) due to binary search
+# Space Complexity: O(1)
 """
 
 def find_local_minima(arr):
@@ -68,7 +71,6 @@ def test_function():
     arr = [3, 2, 1]
     print(f"Index of local minima is {find_local_minima(arr)}")  # Output: 2
 
-# Time Complexity: O(log n) due to binary search
-# Space Complexity: O(1)
+
 
 
