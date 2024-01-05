@@ -1,6 +1,8 @@
 import pytest
 import numpy as np
+import torch
 
+## Numpy implementation
 def knn_find_neighbors(data, query, k):
     """
     Finds the k nearest neighbors of a query point in the given dataset using the Euclidean distance.
@@ -51,5 +53,36 @@ def test_knn_find_neighbors_numpy():
     np.testing.assert_array_equal(indices, expected_indices)
 
     print("Test passed. Neighbors and indices are as expected.")
+
+
+## PyTorch implementation
+
+def knn_find_neighbors_torch(data, query, k):
+    # Calculate Euclidean distances between query and all data points
+    distances = torch.sqrt(((data - query)**2).sum(dim=1))
+
+    # Find the indices of the k smallest distances
+    k_indices = torch.argsort(distances)[:k]
+
+    # Return the k nearest neighbors and their indices
+    return data[k_indices], k_indices
+
+# Test case for PyTorch
+def test_knn_find_neighbors_pytorch():
+    data = torch.tensor([[1.0, 2.0], [2.0, 3.0], [3.0, 4.0], [4.0, 5.0]])
+    query = torch.tensor([2.5, 3.5])
+    k = 2
+
+    neighbors, indices = knn_find_neighbors_torch(data, query, k)
+    expected_neighbors = torch.tensor([[2.0, 3.0], [3.0, 4.0]])
+    expected_indices = torch.tensor([1, 2])
+
+    assert torch.equal(neighbors, expected_neighbors)
+    assert torch.equal(indices, expected_indices)
+
+# Running the test
+
+
+
 
 
