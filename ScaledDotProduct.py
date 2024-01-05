@@ -1,9 +1,6 @@
 import torch
 import numpy as np
 
-import torch
-import numpy as np
-
 def scaled_dot_product_attention(Q, K, V):
     """
     Computes the scaled dot product attention using PyTorch.
