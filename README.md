@@ -12,6 +12,7 @@
 ### Metrics
   - 🔹 [Precision and Recall](PrecisionRecall.py)
   - 🔹 [AUC - ROC Curve](AUC_ROC.py)
+  - 🔹 [Intersection Over Union](IOU.py)
 
 
 ### Other  
