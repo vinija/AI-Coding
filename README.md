@@ -6,7 +6,7 @@
   - 🔹 [K-means clustering](KMeansClustering.py)
   - 🔹 [KNN](KNN.py)
   - 🔹 [Gradient Descent](GradientDescent.py)
-  - 🔹
+  - 🔹 [Precision and Recall](PrecisionRecall.py)
   - 🔹 
   - 🔹
   - 🔹 
