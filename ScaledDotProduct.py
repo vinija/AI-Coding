@@ -57,12 +57,6 @@ def test_scaled_dot_product_attention():
     print("Attention Weights:")
     print(attention_weights)
 
-
-if __name__ == "__main__":
-    test_scaled_dot_product_attention()
-
-
-
 def test_dimensionality():
 
     # Define the dimensions
@@ -85,9 +79,8 @@ def test_dimensionality():
 
 
 if __name__ == "__main__":
-    test_dimensionality()
-    #test_scaled_dot_product_attention()
-    #test_scaled_dot_product_attention_numpy_easy()
+    test_scaled_dot_product_attention()
+
 
 
 
