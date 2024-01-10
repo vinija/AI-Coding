@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn import metrics
 import pytest
+import torch
+from torchmetrics import AUROC
 
 """
 
@@ -35,6 +37,22 @@ FPR = FP/ FP + TN
 An ROC curve plots TPR vs. FPR at different classification thresholds. Lowering the classification threshold classifies more items as positive, thus increasing both False Positives and True Positives. The following figure shows a typical ROC curve.
 - Source: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
 """
+
+def auc_pytorch():
+    # example predictions and labels
+    y_pred = torch.tensor([0.1,0.4,0.35,0.8])
+    y_true = torch.tensor([0,0,1,1])
+
+    # Initialize AUCROC metric
+    aucroc = AUROC(task="binary")
+
+    #Compute AUC-ROC
+    auc_score = aucroc(y_pred, y_true)
+
+    print(f"AUC-ROC Score: {auc_score}")
+
+def test_auc_pytorch():
+    auc_pytorch()
 
 
 def calculate_tpr_fpr(y_true, y_scores, threshold):
@@ -83,6 +101,7 @@ def test_tpr_fpr_numpy():
     expected_FPR = 0.0  # Expected FPR value
 
     assert np.isclose(TPR, expected_TPR) and np.isclose(FPR, expected_FPR), "TPR or FPR calculation is incorrect"
+
 
 
 def calculate_auc_roc_with_sklearn(y_true, y_scores):
