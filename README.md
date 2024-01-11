@@ -2,7 +2,7 @@
 - This repository will contain some of the most frequently used algorithms for AI. 
 - Feel free to help this space grow by contributing!
 
-### Machine Learning Algorithms
+### Machine Learning Algorithms 🤖
   -  [Scaled Dot Product Attention](ScaledDotProduct.py) from 'Attention Is All You Need' by Vaswani et al.
   -  [K-means clustering](KMeansClustering.py)
   -  [KNN](KNN.py)
@@ -11,16 +11,16 @@
   -  [Contrastive Loss](ContrastiveLoss.py)
   -  [Dropout](Dropout.py)
 
-### Metrics
+### Metrics 📈
   -  [Precision and Recall](PrecisionRecall.py)
   -  [AUC - ROC Curve](AUC_ROC.py)
   -  [Intersection Over Union](IOU.py)
   -  [Multi-class Precision, Recall F1](MultiClass.py)
 
-### Architecture
+### Architecture 🗼
  - [ConvNet](Convnet.py)
 
-### Related to ML
+### Related to ML 📓
   -  [Dot product of two sparse vectors](SparseVectors.py)
   -  [Find local minima in an array](LocalMinima.py)
   -  [Does Matrix have equal diagonals](MatrixDiagonal.py)
