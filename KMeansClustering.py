@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 """
 Time and Space Complexity
@@ -8,6 +9,48 @@ Time and Space Complexity
 - **Space Complexity**: O(n * d + k * d), where `n * d` is for storing the data points and `k * d` for the centroids. Additionally, space is used to store the distances from each point to each centroid and the index of the closest centroid for each point.
 
 """
+
+import torch
+
+
+def kmeans(data, k, n_iterations=100):
+    """
+    Perform K-means clustering using PyTorch.
+
+    Args:
+    data (torch.Tensor): A 2D tensor containing the data points.
+    k (int): Number of clusters.
+    n_iterations (int, optional): Number of iterations for the K-means algorithm. Default is 100.
+
+    Returns:
+    torch.Tensor: A tensor containing the centroid coordinates for each cluster.
+    torch.Tensor: A tensor with the cluster indices for each data point.
+    """
+
+    # Number of samples in the dataset
+    n_samples = data.shape[0]
+
+    # Randomly initialize the centroids by selecting k data points
+    centroids = data[torch.randperm(n_samples)[:k]]
+
+    for _ in range(n_iterations):
+        # Compute distances from each data point to each centroid
+        distances = torch.cdist(data, centroids)
+
+        # Assign each data point to the closest centroid
+        labels = torch.argmin(distances, axis=1)
+
+        # Update centroids by calculating the mean of all data points assigned to each cluster
+        for i in range(k):
+            centroids[i] = data[labels == i].mean(dim=0)
+
+    return centroids, labels
+
+
+# Example usage:
+# Assuming `data_tensor` is a 2D tensor of your data points and `num_clusters` is the number of clusters you want
+# centroids, labels = kmeans(data_tensor, num_clusters)
+
 
 def kmeans_clustering(data, k, num_iterations=100):
     """

@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+import torch
 
 """
 Description: IoU is a measure used to evaluate object detection models. 
@@ -13,6 +14,28 @@ The time and space complexity of the `calculate_iou` function are as follows:
 
 
 """
+
+def calculate_iou_torch(box1,box2):
+    # Calculate intersection coordinates
+    x1 = torch.max(box1[0], box2[0])
+    y1 = torch.max(box1[1], box2[1])
+    x2 = torch.min(box1[2], box2[2])
+    y2 = torch.min(box1[3], box2[3])
+
+    intersection = torch.clamp(x2 - x1, min=0) * torch.clamp(y2 - y1, min=0)
+
+    # Calculate area of each bbox
+    area_box1 = (box1[2] - box1[0]) * (box1[3] - box1[1])
+    area_box2 = (box2[2] - box2[0]) * (box2[3] - box2[1])
+
+    # Calculate area of union
+    union = area_box1 + area_box2 - intersection
+
+    # Calculate IoU
+    iou = intersection / union
+
+    return iou
+
 
 def calculate_iou(boxA, boxB):
     """

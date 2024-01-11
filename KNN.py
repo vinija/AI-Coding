@@ -21,6 +21,8 @@ Space Complexity:
 The NumPy and PyTorch implementations have similar complexity, but they might differ slightly in performance due to differences in how these libraries handle array operations and memory management. The PyTorch version can leverage GPU acceleration if the data is on a GPU, potentially offering faster computation for large datasets.
 
 """
+
+
 def knn_find_neighbors(data, query, k):
     """
     Finds the k nearest neighbors of a query point in the given dataset using the Euclidean distance.
