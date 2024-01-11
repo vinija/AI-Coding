@@ -22,6 +22,49 @@ The NumPy and PyTorch implementations have similar complexity, but they might di
 
 """
 
+import torch
+import numpy as np
+
+def knn_pytorch(data, query, k, distance_fn):
+    """
+    Perform K-Nearest Neighbors classification.
+
+    Args:
+        data (torch.Tensor): Training dataset, where each row is a data point.
+        query (torch.Tensor): Query dataset, where each row is a data point to classify.
+        k (int): Number of nearest neighbors to consider.
+        distance_fn (callable): Function to compute the distance between data points.
+
+    Returns:
+        torch.Tensor: Predicted labels for the query dataset.
+    """
+
+    # Calculate distances between each query point and all data points
+    distances = distance_fn(data, query)
+
+    # Find the indices of k smallest distances
+    _, indices = torch.topk(distances, k, largest=False)
+
+    # Gather labels of k nearest neighbors
+    labels = data[indices][:, :, -1]  # Assuming the last column of data is the label
+
+    # Predict by majority vote
+    predictions, _ = torch.mode(labels, dim=1)
+
+    return predictions
+
+# Distance function (Euclidean)
+def euclidean_distance(x1, x2):
+    return torch.sqrt(torch.sum((x1 - x2) ** 2, axis=1))
+
+# Example usage
+data = torch.tensor([[1, 1, 0], [2, 2, 0], [3, 3, 1], [4, 4, 1]])  # Last column is the label
+query = torch.tensor([[1.5, 1.5], [3.5, 3.5]])
+k = 2
+predictions = knn_pytorch(data[:, :-1], query, k, euclidean_distance)
+print(predictions)
+
+
 
 def knn_find_neighbors(data, query, k):
     """

@@ -71,6 +71,43 @@ def test_function():
     arr = [3, 2, 1]
     print(f"Index of local minima is {find_local_minima(arr)}")  # Output: 2
 
+import torch
+
+def find_local_minima(arr):
+    # Convert the array to a PyTorch tensor
+    tensor = torch.tensor(arr, dtype=torch.float)
+
+    # Handle edge case for empty array or array with a single element
+    if tensor.numel() <= 1:
+        return []
+
+    # Initialize a list to store the indices of local minima
+    local_minima_indices = []
+
+    # Check for the first element
+    if tensor[0] < tensor[1]:
+        local_minima_indices.append(0)
+
+    # Check for the middle elements
+    for i in range(1, tensor.size(0) - 1):
+        if tensor[i] < tensor[i - 1] and tensor[i] < tensor[i + 1]:
+            local_minima_indices.append(i)
+
+    # Check for the last element
+    if tensor[-1] < tensor[-2]:
+        local_minima_indices.append(tensor.size(0) - 1)
+
+    return local_minima_indices
+
+def test_pytorch():
+    # Example array
+    arr = [3, 2, 4, 1, 5]
+
+    # Find the indices of local minima
+    local_minima_indices = find_local_minima(arr)
+    print(local_minima_indices)
+
+
 
 
 

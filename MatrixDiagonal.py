@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 """
 Check to see if the matrix has equal diagonals from upper left to lower right. Example: [[0,1,2],[3,0,1],[4,3,0]]
@@ -8,6 +9,33 @@ Time Complexity: O(rows * cols), where rows and cols are the dimensions of the m
 Space Complexity: O(1), as the space used by the function is constant and does not depend on the size of the matrix. The algorithm only uses a fixed number of variables for iteration and comparison.
 """
 
+
+def check_diagonal_consistency_torch(matrix):
+    # Convert the 2D list matrix to a PyTorch tensor
+    tensor = torch.tensor(matrix)
+
+    # Get the size of the tensor
+    rows, cols = tensor.shape
+
+    # Iterate over all possible diagonals that start from the first row and the last column
+    for start_col in range(cols):
+        if not torch.all(tensor.diagonal(start_col) == tensor[0, start_col]):
+            return False
+
+    # Iterate over all possible diagonals that start from the first column and the last row (excluding the first element)
+    for start_row in range(1, rows):
+        if not torch.all(tensor.diagonal(-start_row) == tensor[start_row, 0]):
+            return False
+
+    return True
+
+def test_torch():
+    # Example matrix
+    matrix = [[1, 2, 3], [4, 1, 2], [5, 4, 1]]
+
+    # Check diagonal consistency
+    consistent = check_diagonal_consistency(matrix)
+    print(consistent)
 
 def check_diagonal_consistency(matrix):
     """
