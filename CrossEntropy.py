@@ -1,5 +1,7 @@
 import numpy as np
 import pytest
+import torch
+import torch.nn as nn
 
 """
 Time and Space Complexity:
@@ -14,7 +16,38 @@ Space Complexity:
 
 The function is efficient and scales linearly with the number of data points, making it suitable for large datasets typical in machine learning tasks. The space requirement is minimal, ensuring its usability even in memory-constrained environments.
 
+BCE = - mean(y*log(p) + (1-y)*log(1-p))
+
 """
+def cross_entropy_pytorch_scratch(y_true, y_pred):
+
+    #Ensure y_pred is clamped to avoid log(0)
+    y_pred = torch.clamp(y_pred, min=1e-7, max = 1-1e-7)
+
+    #Calculate loss
+    loss = -torch.mean(y_true *torch.log(y_pred) + (1-y_true) * torch.log(1-y_pred))
+    return loss
+
+def test_bce_torch():
+    y_true = torch.tensor([1, 0, 1, 0], dtype=torch.float32)
+    y_pred = torch.tensor([0.9, 0.1, 0.8, 0.2], dtype=torch.float32)
+
+    loss = cross_entropy_pytorch_scratch(y_true, y_pred)
+    print(f"Cross Entropy Loss: {loss.item()}")
+def bce_torch():
+    y_pred = torch.tensor([0.7,0.3,0.6,0.4], requires_grad=True)
+    y_true = torch.tensor([1,0,1,0], dtype= torch.float32)
+
+    criterion = nn.BCELoss()
+    loss = criterion(y_pred, y_true)
+
+    loss.backward()
+
+    print(f"BCE Loss: {loss}")
+
+def test_bce_torch():
+    bce_torch()
+
 def binary_cross_entropy_loss(y_true, y_pred):
     """
     Compute the binary cross-entropy loss, a common loss function for binary classification tasks.
@@ -54,7 +87,7 @@ def test_binary_cross_entropy_loss():
     assert calculated_loss == pytest.approx(expected_loss, 0.01), f"Expected Loss: {expected_loss}, but got: {calculated_loss}"
 
 # Run the test
-test_binary_cross_entropy_loss()
+#test_binary_cross_entropy_loss()
 
 # Example usage
 # loss = binary_cross_entropy_loss(y_true, y_pred)

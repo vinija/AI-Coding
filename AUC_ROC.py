@@ -38,6 +38,64 @@ An ROC curve plots TPR vs. FPR at different classification thresholds. Lowering 
 - Source: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
 """
 
+def calculate_tpr_fpr_torch(y_true, y_pred, threshold):
+    # Apply the threshold to the predictions
+    pred_bin = (y_pred >= threshold).float()
+
+    # True Positive (TP): correctly predicted positive
+    TP = torch.sum((y_true == 1) & (pred_bin == 1)).float()
+
+    # False Positive (FP): incorrectly predicted positive
+    FP = torch.sum((y_true == 0) & (pred_bin == 1)).float()
+
+    # True Negative (TN): correctly predicted negative
+    TN = torch.sum((y_true == 0) & (pred_bin == 0)).float()
+
+    # False Negative (FN): incorrectly predicted negative
+    FN = torch.sum((y_true == 1) & (pred_bin == 0)).float()
+
+    # True Positive Rate (TPR) or Sensitivity
+    TPR = TP / (TP + FN)
+
+    # False Positive Rate (FPR)
+    FPR = FP / (FP + TN)
+
+    return TPR, FPR
+
+def auc_roc(y_true, y_pred):
+    # Sort predictions and corresponding true values
+    sorted_indices = torch.argsort(y_pred, descending=True)
+    y_true_sorted = y_true[sorted_indices]
+    y_pred_sorted = y_pred[sorted_indices]
+
+    # Initialize
+    tpr_values = [0.0]
+    fpr_values = [0.0]
+
+    # Compute TPR and FPR at each threshold
+    for threshold in y_pred_sorted:
+        TPR, FPR = calculate_tpr_fpr_torch(y_true_sorted, y_pred_sorted, threshold)
+        tpr_values.append(TPR.item())
+        fpr_values.append(FPR.item())
+
+    # Add (1,1) to complete the curve
+    tpr_values.append(1.0)
+    fpr_values.append(1.0)
+
+    # Compute AUC using the trapezoidal rule
+    auc = 0.0
+    for i in range(1, len(tpr_values)):
+        auc += (fpr_values[i] - fpr_values[i - 1]) * (tpr_values[i] + tpr_values[i - 1]) / 2
+
+    return auc
+
+def test_full_torch():
+    y_true = torch.tensor([1, 0, 1, 0])
+    y_pred = torch.tensor([0.9, 0.3, 0.8, 0.4])
+    print("AUC-ROC:", auc_roc(y_true, y_pred))
+
+
+
 def auc_pytorch():
     # example predictions and labels
     y_pred = torch.tensor([0.1,0.4,0.35,0.8])
