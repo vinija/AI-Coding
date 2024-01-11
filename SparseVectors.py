@@ -71,3 +71,56 @@ def test_sparse_vector_numpy():
     assert v1.dotProduct(v2) == 0, "Dot product calculation is incorrect."
 
 
+import torch
+
+class SparseVectorTorch:
+    def __init__(self, nums):
+        """
+        Initialize the SparseVector.
+
+        Args:
+        nums (torch.Tensor): A 1D PyTorch tensor representing the sparse vector.
+        """
+        self.indices = nums.nonzero(as_tuple=False).view(-1)
+        self.values = nums[self.indices]
+
+    def dotProduct(self, vec):
+        """
+        Compute the dot product between this SparseVector and another SparseVector.
+
+        Args:
+        vec (SparseVector): Another SparseVector instance.
+
+        Returns:
+        float: The result of the dot product.
+        """
+        # Get the intersection of indices in both vectors
+        common_indices = torch.intersect1d(self.indices, vec.indices)
+
+        # Compute the dot product for common indices
+        result = 0
+        for i in common_indices:
+            result += self.values[i] * vec.values[i]
+
+        return result
+
+# Test cases
+def test_sparse_vector():
+    # Test case 1
+    nums1 = torch.tensor([1, 0, 0, 2, 3], dtype=torch.float32)
+    nums2 = torch.tensor([0, 3, 0, 4, 0], dtype=torch.float32)
+    v1 = SparseVectorTorch(nums1)
+    v2 = SparseVectorTorch(nums2)
+    assert v1.dotProduct(v2) == 8, "Dot product calculation is incorrect."
+
+    # Test case 2
+    nums1 = torch.tensor([0, 1, 0, 0, 0], dtype=torch.float32)
+    nums2 = torch.tensor([0, 0, 0, 0, 2], dtype=torch.float32)
+    v1 = SparseVectorTorch(nums1)
+    v2 = SparseVectorTorch(nums2)
+    assert v1.dotProduct(v2) == 0, "Dot product calculation is incorrect."
+
+
+
+
+
