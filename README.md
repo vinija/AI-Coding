@@ -8,6 +8,7 @@
   - 🔹 [KNN](KNN.py)
   - 🔹 [Gradient Descent](GradientDescent.py)
   - 🔹 [Cross Entropy loss](CrossEntropy.py)
+  - 🔹 [Contrastive Loss](ContrastiveLoss.py)
 
 ### Metrics
   - 🔹 [Precision and Recall](PrecisionRecall.py)
