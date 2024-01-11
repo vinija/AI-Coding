@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import torch
 
 """
 Gradient descent is an optimization algorithm used to minimize a function (usually a loss function) by iteratively moving towards the minimum value of the function.
@@ -13,6 +14,40 @@ The `gradient_descent` function in this script is used to find the best-fit line
 This function is a basic implementation of gradient descent for linear regression and is useful for understanding the fundamental concepts of this optimization technique.
 """
 
+import torch
+
+
+# Objective function: f(x) = (x - 3)^2
+def objective_function(x):
+    return (x - 3) ** 2
+
+
+# Gradient descent function
+def gradient_descent_torch(starting_point, learning_rate, num_iterations):
+    x = torch.tensor([starting_point],dtype=torch.float32, requires_grad=True)
+    for _ in range(num_iterations):
+        # Calculate the function value and gradients
+        loss = objective_function(x)
+        loss.backward()
+
+        # Update x without accumulating gradients
+        with torch.no_grad():
+            x -= learning_rate * x.grad
+
+        # Zero the gradients after updating
+        x.grad.zero_()
+
+    return x.item()
+
+def test_gd_torch():
+    # Parameters
+    starting_point = 0  # Starting point for x
+    learning_rate = 0.1  # Learning rate
+    num_iterations = 100  # Number of iterations
+
+    # Perform gradient descent
+    minimum = gradient_descent_torch(starting_point, learning_rate, num_iterations)
+    print(f"The minimum of the function is at x = {minimum}")
 
 
 def gradient_descent(x, y, iterations=1000, learning_rate=0.0001, stopping_threshold=1e-6):
