@@ -9,6 +9,7 @@
   - 🔹 [Gradient Descent](GradientDescent.py)
   - 🔹 [Cross Entropy loss](CrossEntropy.py)
   - 🔹 [Contrastive Loss](ContrastiveLoss.py)
+  - 🔹 [Dropout](Dropout.py)
 
 ### Metrics
   - 🔹 [Precision and Recall](PrecisionRecall.py)
