@@ -15,8 +15,10 @@
   - 🔹 [Intersection Over Union](IOU.py)
   - 🔹 [Multi-class Precision, Recall F1](MultiClass.py)
 
+### Architecture
+ - 🔹[ConvNet](Convnet.py)
 
-### Other  
+### Related to ML
   - 🔹 [Dot product of two sparse vectors](SparseVectors.py)
   - 🔹 [Find local minima in an array](LocalMinima.py)
   - 🔹 [Does Matrix have equal diagonals](MatrixDiagonal.py)
