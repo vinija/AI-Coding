@@ -20,6 +20,30 @@ Space Complexity:
 
 The NumPy and PyTorch implementations have similar complexity, but they might differ slightly in performance due to differences in how these libraries handle array operations and memory management. The PyTorch version can leverage GPU acceleration if the data is on a GPU, potentially offering faster computation for large datasets.
 
+Edge Case
+
+When using K-Nearest Neighbors (KNN), several corner cases can arise that may affect its performance or applicability:
+
+1. **Choosing the Value of `k`**: The value of `k` (the number of neighbors to consider) is a crucial hyperparameter in KNN. Choosing the wrong `k` can lead to poor model performance. If `k` is too small (e.g., `k = 1`), the model becomes sensitive to noise and outliers, which may result in overfitting. If `k` is too large, the model may oversmooth the decision boundary, leading to underfitting and potentially capturing less distinct patterns in the data. Use cross-validation to experiment with different values of `k` and select the one that gives the best performance on validation data. Typically, odd values of `k` are preferred to avoid ties in binary classification tasks.
+
+2. **Handling Ties**: Ties can occur when an equal number of neighbors from different classes are within the same distance from the query point, especially when `k` is an even number. A tie can make it unclear how to classify the query point, leading to potential ambiguity in predictions. Choose an odd value of `k` to reduce the likelihood of ties. If ties still occur, consider breaking the tie by using additional criteria such as the distance of the neighbors or their class probabilities.
+
+3. **Curse of Dimensionality**: KNN relies on distance metrics to identify nearest neighbors. In high-dimensional spaces, distances between points become less meaningful because all points tend to become equidistant. The model may perform poorly because the nearest neighbors in high-dimensional space may not be representative of the true nearest neighbors, leading to incorrect classifications. Use dimensionality reduction techniques like PCA, t-SNE, or LDA to reduce the number of features before applying KNN. Feature selection techniques can also help by retaining only the most relevant features.
+
+4. **Imbalanced Classes**: KNN can struggle with class imbalance, where one class is significantly underrepresented compared to others. The majority class can dominate the predictions, leading to poor performance on the minority class. Consider using techniques like weighted KNN, where the votes of the neighbors are weighted by their distance to the query point, giving closer neighbors more influence. Additionally, you can balance the dataset using techniques like SMOTE (Synthetic Minority Over-sampling Technique) or by using stratified sampling.
+
+5. **Computational Cost**: KNN requires computing the distance between the query point and all points in the training set, which can be computationally expensive, especially for large datasets. The model can become slow and inefficient, making it impractical for real-time applications or very large datasets. Use techniques like KD-trees, Ball-trees, or approximate nearest neighbor algorithms to reduce the computational cost. For very large datasets, consider sampling a subset of the data or using a precomputed distance matrix.
+
+6. **Sensitivity to Noise**: KNN is sensitive to noisy data points because they can disproportionately affect the classification, especially when `k` is small. Noisy data points can lead to incorrect classifications, reducing the model's accuracy. Increase the value of `k` to reduce the influence of noise or use a distance-weighted version of KNN, where closer neighbors have more influence. Preprocessing the data to remove or reduce noise can also help improve performance.
+
+7. **Non-Uniform Feature Scales**: If the features in the dataset have different scales, the distance metric can be dominated by features with larger ranges, leading to biased results. The model might give more importance to features with larger scales, even if they are not the most relevant for classification. Standardize or normalize the feature values to ensure that all features contribute equally to the distance calculation. Techniques like Min-Max scaling or Z-score standardization are commonly used to address this issue.
+
+8. **Handling Missing Data**: KNN does not inherently handle missing data, so it must be addressed before applying the algorithm. Missing data can lead to incorrect distance calculations or the inability to compute distances for certain points, leading to unreliable predictions. Impute missing values using techniques like mean, median, or mode imputation, or use more sophisticated imputation methods like KNN imputation (where missing values are filled in based on the values of the nearest neighbors).
+
+9. **Decision Boundary Sensitivity**: KNN's decision boundary is non-parametric and can be very sensitive to the distribution of the training data. Small changes in the training data can lead to significant changes in the decision boundary, leading to inconsistent model performance. Ensure that the training data is representative and includes enough samples to smooth out the decision boundary. If necessary, use techniques like bagging or bootstrapping to improve the stability of the model.
+
+10. **Handling Large Datasets**: KNN can become impractical with very large datasets due to its high memory usage and slow prediction time. The model may become too slow to be useful, especially in real-time applications or when dealing with large-scale datasets. Use dimensionality reduction techniques or approximate nearest neighbor methods to speed up the computation. Alternatively, consider using faster algorithms like decision trees or random forests, which can handle large datasets more efficiently.
+
 """
 
 import torch
