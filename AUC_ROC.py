@@ -36,6 +36,11 @@ FPR = FP/ FP + TN
 
 An ROC curve plots TPR vs. FPR at different classification thresholds. Lowering the classification threshold classifies more items as positive, thus increasing both False Positives and True Positives. The following figure shows a typical ROC curve.
 - Source: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
+
+Edge Cases
+
+- Edge cases in AUC-ROC include scenarios such as a perfect classifier (AUC = 1), indicating no misclassifications, and a random classifier (AUC = 0.5), which performs no better than guessing. An inverse classifier (AUC = 0) consistently predicts the opposite of the true class. Other edge cases include when a model predicts only a single class, making the ROC curve undefined, and when dealing with imbalanced datasets, where AUC might misleadingly suggest good performance despite poor handling of the minority class. These edge cases highlight the importance of context when interpreting AUC-ROC results.
+- These edge cases in AUC-ROC typically arise due to model overfitting, class imbalance, insufficient model complexity, or data quality issues. To avoid them, employ robust model evaluation techniques, use alternative metrics when appropriate, and ensure that the model and data preprocessing steps are tailored to the specific challenges of the problem at hand.
 """
 
 def calculate_tpr_fpr_torch(y_true, y_pred, threshold):
